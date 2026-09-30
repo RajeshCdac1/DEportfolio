@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rajesh Giri | Data Engineer</title>
+<meta name="description" content="Rajesh Giri, Data Engineer in Pune. Lakehouse pipelines with PySpark, Azure Databricks, Delta Lake and AWS.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f8fa;--surface:#fff;--ink:#14202e;--muted:#566274;--line:#dde2e9;--accent:#0a6a78;--soft:#e3f1f3;--bronze:#b9794a;--silver:#8a97a8;--gold:#c79a1f;
+--serif:'Source Serif 4',Georgia,serif;--sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif}
+@media(prefers-color-scheme:dark){:root[data-theme=auto]{--bg:#0f151d;--surface:#161e29;--ink:#e6ebf1;--muted:#9aa7b8;--line:#263241;--accent:#5cc3d1;--soft:#16303a}}
+:root[data-theme=dark]{--bg:#0f151d;--surface:#161e29;--ink:#e6ebf1;--muted:#9aa7b8;--line:#263241;--accent:#5cc3d1;--soft:#16303a}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+h1,h2,h3{margin:0}
+
+/* Top bar */
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{font-weight:600;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo{width:32px;height:32px;border-radius:8px;background:var(--accent);color:var(--bg);display:grid;place-items:center;font:600 14px var(--sans)}
+nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0}
+nav a{display:block;padding:8px 12px;border-radius:6px;text-decoration:none;color:var(--muted);font-size:14.5px}
+nav a:hover{color:var(--ink)}
+nav a.active{color:var(--accent);background:var(--soft);font-weight:500}
+.tools{display:flex;gap:8px;align-items:center}
+.icon-btn{width:38px;height:38px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;font-size:16px}
+.icon-btn:hover{border-color:var(--accent)}
+#menuBtn{display:none}
+
+/* Buttons */
+.btn{display:inline-block;padding:11px 20px;border-radius:8px;border:1px solid var(--line);background:var(--surface);text-decoration:none;font-size:15px;font-weight:500;cursor:pointer;font-family:inherit;color:var(--ink)}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.btn.primary:hover{filter:brightness(1.08)}
+.row{display:flex;flex-wrap:wrap;gap:12px}
+
+/* Hero */
+.hero{padding:88px 0 80px}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+.status{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);border:1px solid var(--line);background:var(--surface);padding:5px 14px;border-radius:999px;margin-bottom:22px}
+.dot{width:8px;height:8px;border-radius:50%;background:#2e9e5b}
+h1{font:600 clamp(38px,5.6vw,60px)/1.06 var(--serif);letter-spacing:-.015em;margin-bottom:20px}
+.lede{font-size:18px;color:var(--muted);max-width:56ch;margin:0 0 30px}
+.meta{display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:30px;color:var(--muted);font-size:14.5px}
+
+/* Medallion visual */
+.layers{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;gap:10px}
+.layers h2{font:500 14px var(--sans);color:var(--muted);margin-bottom:4px}
+.layer{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:10px;border:1px solid var(--line);border-left:5px solid var(--c)}
+.layer b{display:block;font-size:15px}
+.layer span{font-size:13.5px;color:var(--muted)}
+.layer:nth-of-type(1){--c:var(--bronze)}.layer:nth-of-type(2){--c:var(--silver)}.layer:nth-of-type(3){--c:var(--gold)}
+.arrow{text-align:center;color:var(--muted);font-size:13px;line-height:1}
+
+/* Sections */
+section.block{padding:84px 0;border-top:1px solid var(--line)}
+section.alt{background:var(--surface)}
+.head{max-width:60ch;margin-bottom:40px}
+h2.title{font:600 clamp(28px,4vw,38px)/1.15 var(--serif);margin-bottom:10px}
+.head p{margin:0;color:var(--muted)}
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:26px}
+.alt .card{background:var(--bg)}
+.card h3{font-size:18px;margin-bottom:6px}
+.card p{margin:0;color:var(--muted);font-size:15.5px}
+.tag{display:inline-block;font-size:12.5px;padding:2px 10px;border-radius:999px;background:var(--soft);color:var(--accent);font-weight:500;margin:0 6px 6px 0}
+.tags{margin-top:16px}
+.k{font-size:13px;color:var(--accent);font-weight:600;margin-bottom:10px;display:block}
+
+/* Experience timeline */
+.tl{position:relative;padding-left:32px}
+.tl::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.job{position:relative;margin-bottom:28px}
+.job::before{content:"";position:absolute;left:-32px;top:30px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:3px solid var(--accent)}
+.job.past::before{border-color:var(--silver)}
+.jh{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 16px;align-items:baseline}
+.when{font-size:14px;color:var(--muted)}
+.sub{color:var(--muted);font-size:14.5px;margin:2px 0 14px!important}
+ul.b{margin:0;padding-left:1.1em;color:var(--ink)}
+ul.b li{margin:7px 0;font-size:15.5px}
+ul.b li::marker{color:var(--accent)}
+
+/* Skills / education */
+.card dl{margin:0}
+.card dd{margin:0;color:var(--muted);font-size:15px}
+
+/* Contact */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+form{display:grid;gap:14px}
+label{font-size:14px;font-weight:500;display:grid;gap:6px}
+input,textarea{font:inherit;padding:11px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+input:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
+textarea{min-height:130px;resize:vertical}
+.links{display:grid;gap:12px;margin-top:22px}
+.links a{display:flex;justify-content:space-between;padding:14px 16px;border:1px solid var(--line);border-radius:10px;text-decoration:none;background:var(--bg)}
+.links a:hover{border-color:var(--accent)}
+.links small{color:var(--muted)}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+
+@media(max-width:860px){
+  .hero{padding:56px 0}
+  .hero .wrap,.contact,.g2,.g3{grid-template-columns:1fr}
+  .hero .wrap{gap:36px}
+  #menuBtn{display:block}
+  nav{position:absolute;top:64px;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--line);display:none;padding:10px 24px 16px}
+  nav.open{display:block}
+  nav ul{flex-direction:column}
+  section.block{padding:56px 0}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#home"><span class="logo">RG</span>Rajesh Giri</a>
+    <nav id="nav" aria-label="Primary">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="tools">
+      <button class="icon-btn" id="themeBtn" aria-label="Switch light or dark theme">◐</button>
+      <button class="icon-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="nav">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- Home -->
+<section class="hero" id="home">
+  <div class="wrap">
+    <div>
+      <span class="status"><span class="dot"></span>Open to data engineering roles</span>
+      <h1>Data engineer building reliable lakehouse pipelines.</h1>
+      <p class="lede">I design and tune production ETL/ELT pipelines on PySpark, Azure Databricks and AWS, so business teams get correct data on time at a lower compute cost.</p>
+      <div class="row">
+        <a class="btn primary" href="#contact">Get in touch</a>
+        <a class="btn" href="https://drive.google.com/file/d/15QKAafkFh8aMWjjablhoeUrD1aGsCX_s/view?usp=drive_link" target="_blank" rel="noopener noreferrer">View resume</a>
+        <a class="btn" href="#projects">See projects</a>
+      </div>
+      <div class="meta"><span>Pune, Maharashtra, India</span><span>3.6 years experience</span><span>E-commerce and retail data</span></div>
+    </div>
+    <div class="layers" aria-label="Medallion architecture">
+      <h2>How I structure data: medallion architecture</h2>
+      <div class="layer"><div><b>Bronze</b><span>Raw data landed as-is from source systems</span></div></div>
+      <div class="arrow">▼ clean, validate, deduplicate</div>
+      <div class="layer"><div><b>Silver</b><span>Cleaned, conformed and quality-checked tables</span></div></div>
+      <div class="arrow">▼ model and aggregate</div>
+      <div class="layer"><div><b>Gold</b><span>Business-ready sales, product and customer datasets</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="block alt" id="about">
+  <div class="wrap">
+    <div class="head"><h2 class="title">What I do</h2><p>Three areas where I spend most of my time.</p></div>
+    <div class="grid g3">
+      <div class="card"><span class="k">Architecture</span><h3>Lakehouse design</h3><p>Bronze, Silver and Gold layers on Delta Lake over AWS S3, with ACID transactions and schema enforcement.</p></div>
+      <div class="card"><span class="k">Performance</span><h3>Spark tuning</h3><p>Partitioning, Z-Ordering, caching and query tuning to reduce cluster runtime and compute cost.</p></div>
+      <div class="card"><span class="k">Delivery</span><h3>Automation and CI/CD</h3><p>Automated batch workflows, schema evolution, monitoring and failure alerts, shipped through Azure DevOps and Git.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section class="block" id="experience">
+  <div class="wrap">
+    <div class="head"><h2 class="title">Experience</h2><p>Production data engineering for large e-commerce and retail clients.</p></div>
+    <div class="tl">
+      <article class="job card">
+        <div class="jh"><h3>Data Engineer, 2GBR Software Pvt Ltd</h3><span class="when">Dec 2025 to present</span></div>
+        <p class="sub">Client project: Best Buy (e-commerce and retail), Pune</p>
+        <ul class="b">
+          <li>Designed and built end-to-end ETL pipelines in PySpark and Azure Databricks for T-1 data processing.</li>
+          <li>Built and maintain the Bronze, Silver and Gold lakehouse layers using Delta Lake on AWS S3.</li>
+          <li>Delivered sales, product, geographic and customer datasets for business analytics.</li>
+          <li>Reduced cluster runtime and compute cost with partitioning, Z-Ordering, caching and query tuning.</li>
+          <li>Automated workflows, schema evolution, monitoring and failure alerts.</li>
+          <li>Set up CI/CD with Azure DevOps and Git in an Agile team.</li>
+        </ul>
+      </article>
+      <article class="job past card">
+        <div class="jh"><h3>Associate Data Engineer, Synergie Technik Pvt Ltd</h3><span class="when">Apr 2023 to Nov 2025</span></div>
+        <p class="sub">Client project: Kohl's (e-commerce), Pune</p>
+        <ul class="b">
+          <li>Developed and maintained automated batch workflows in Azure Databricks using PySpark.</li>
+          <li>Managed Delta tables with ACID transactions and schema enforcement.</li>
+          <li>Created reusable Python packages for standard ETL steps, shortening pipeline development time.</li>
+          <li>Added data quality checks and test suites to catch integrity issues before production.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section class="block alt" id="projects">
+  <div class="wrap">
+    <div class="head"><h2 class="title">Projects</h2><p>Selected pipeline and performance work.</p></div>
+    <div class="grid g2">
+      <article class="card"><span class="k">Retail data</span><h3>E-commerce medallion lakehouse pipeline</h3>
+        <p>End-to-end Delta Lake ingestion on AWS S3 using Azure Databricks and PySpark. Automated Bronze-to-Gold transformations feed customer and sales reporting.</p>
+        <div class="tags"><span class="tag">PySpark</span><span class="tag">Delta Lake</span><span class="tag">AWS S3</span><span class="tag">Azure Databricks</span></div></article>
+      <article class="card"><span class="k">Performance engineering</span><h3>Spark job cost optimization</h3>
+        <p>Query tuning, partitioning, Z-Ordering and caching applied to batch ETL workloads in Databricks, lowering cluster cost and run time.</p>
+        <div class="tags"><span class="tag">PySpark</span><span class="tag">Z-Ordering</span><span class="tag">Python packages</span><span class="tag">Azure DevOps</span></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section class="block" id="skills">
+  <div class="wrap">
+    <div class="head"><h2 class="title">Skills</h2><p>Tools I use day to day.</p></div>
+    <div class="grid g3">
+      <div class="card"><h3>Data platform</h3><div class="tags"><span class="tag">Apache Spark</span><span class="tag">PySpark</span><span class="tag">Spark SQL</span><span class="tag">Delta Lake</span><span class="tag">Medallion architecture</span><span class="tag">Data warehousing</span><span class="tag">Data modeling</span></div></div>
+      <div class="card"><h3>Cloud and DevOps</h3><div class="tags"><span class="tag">Azure Databricks</span><span class="tag">ADLS Gen2</span><span class="tag">AWS S3</span><span class="tag">AWS IAM</span><span class="tag">Azure DevOps</span><span class="tag">Git and GitHub</span></div></div>
+      <div class="card"><h3>Languages and tools</h3><div class="tags"><span class="tag">Python (OOP)</span><span class="tag">Java</span><span class="tag">Pandas</span><span class="tag">MySQL</span><span class="tag">PyCharm</span><span class="tag">Agile/Scrum</span></div></div>
+      <div class="card" style="grid-column:1/-1"><h3>Communication languages</h3><div class="tags"><span class="tag">English</span><span class="tag">Hindi</span><span class="tag">Marathi</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Education -->
+<section class="block alt" id="education">
+  <div class="wrap">
+    <div class="head"><h2 class="title">Education</h2></div>
+    <div class="grid g2">
+      <div class="card"><span class="k">2023</span><h3>PG Diploma in Advanced Computing (PG-DAC)</h3><p>CDAC Thiruvananthapuram, Kerala</p></div>
+      <div class="card"><span class="k">2021</span><h3>Bachelor of Engineering (B.E.)</h3><p>Savitribai Phule Pune University, Maharashtra</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="block" id="contact">
+  <div class="wrap">
+    <div class="head"><h2 class="title">Contact</h2><p>Hiring or want to talk about data pipelines? Send a message and it opens in your email app.</p></div>
+    <div class="contact">
+      <form id="form">
+        <label>Your name<input name="name" required autocomplete="name"></label>
+        <label>Your email<input name="email" type="email" required autocomplete="email"></label>
+        <label>Message<textarea name="msg" required></textarea></label>
+        <button class="btn primary" type="submit">Send message</button>
+      </form>
+      <div>
+        <div class="links">
+          <a href="mailto:rajeshgiri.work@gmail.com"><span>Email</span><small>rajeshgiri.work@gmail.com</small></a>
+          <a href="https://linkedin.com/in/rajesh-giri" target="_blank" rel="noopener noreferrer"><span>LinkedIn</span><small>linkedin.com/in/rajesh-giri</small></a>
+          <a href="https://drive.google.com/file/d/15QKAafkFh8aMWjjablhoeUrD1aGsCX_s/view?usp=drive_link" target="_blank" rel="noopener noreferrer"><span>Resume</span><small>View on Google Drive</small></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>© <span id="yr">2026</span> Rajesh Giri</span><a href="#home">Back to top</a></div></footer>
+
+<script>
+const root=document.documentElement;
+try{const t=localStorage.getItem('theme');if(t)root.dataset.theme=t}catch(e){}
+document.getElementById('themeBtn').addEventListener('click',()=>{
+  const dark=getComputedStyle(root).getPropertyValue('--bg').trim()==='#0f151d';
+  const next=dark?'light':'dark';root.dataset.theme=next;
+  try{localStorage.setItem('theme',next)}catch(e){}
+});
+const nav=document.getElementById('nav'),mb=document.getElementById('menuBtn');
+mb.addEventListener('click',()=>{const o=nav.classList.toggle('open');mb.setAttribute('aria-expanded',o)});
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');mb.setAttribute('aria-expanded',false)}));
+// Highlight current section in nav
+const links=[...nav.querySelectorAll('a')];
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting)links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id));
+}),{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('main section[id]').forEach(s=>io.observe(s));
+// Contact form opens the visitor's email app
+document.getElementById('form').addEventListener('submit',e=>{
+  e.preventDefault();const f=new FormData(e.target);
+  const body=`${f.get('msg')}\n\nFrom: ${f.get('name')} (${f.get('email')})`;
+  location.href=`mailto:rajeshgiri.work@gmail.com?subject=${encodeURIComponent('Portfolio message from '+f.get('name'))}&body=${encodeURIComponent(body)}`;
+});
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
